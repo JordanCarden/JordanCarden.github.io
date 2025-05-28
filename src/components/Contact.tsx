@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Mail, MapPin, Send, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,15 +22,26 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    
+    try {
+      await emailjs.sendForm(
+        'service_lf3gtpu', // Replace with your EmailJS service ID
+        'template_bf2lu8b', // Replace with your EmailJS template ID
+        formRef.current,
+        'GiU7WvvP2htBtzk1v' // Replace with your EmailJS public key
+      );
+      
       setIsSubmitting(false);
       setSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -134,7 +147,7 @@ const Contact = () => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form ref={formRef} onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label
