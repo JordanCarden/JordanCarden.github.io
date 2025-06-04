@@ -27,7 +27,7 @@ const About = () => {
             className="md:w-1/2"
           >
             <img
-              src="https://images.pexels.com/photos/1181345/pexels-photo-1181345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src="/Headshot.jpg"
               alt="Professional headshot"
               className="rounded-lg shadow-lg w-full max-w-md mx-auto"
             />
