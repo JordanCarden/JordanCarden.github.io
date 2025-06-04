@@ -27,7 +27,7 @@ const About = () => {
             className="md:w-1/2"
           >
             <img
-              src="/Headshot.png"
+              src="/6840616542e2f585a86817cc-HeadshotPro.png"
               alt="Professional headshot"
               className="rounded-lg shadow-lg w-full max-w-md mx-auto"
             />
